@@ -19,7 +19,7 @@ namespace Catalog.Api.Data
 
             Products = database.GetCollection<Product>(settings.CollectionName);
 
-            CatalogContextSeed.SeeData(Products);
+            CatalogContextSeed.SeedData(Products);
         }
 
 

@@ -24,7 +24,7 @@ namespace Catalog.Api.Repositories
 
         public async Task<bool> Delete(string id)
         {
-            FilterDefinition<Product> filter = Builders<Product>.Filter.ElemMatch(p => p.Id, id);
+            FilterDefinition<Product> filter = Builders<Product>.Filter.Eq(p => p.Id, id);
 
             DeleteResult deleteResult = await _context.Products.DeleteOneAsync(filter);
 

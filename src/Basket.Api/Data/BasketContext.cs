@@ -5,6 +5,14 @@ namespace Basket.Api.Data
 {
     public class BasketContext : IBasketContext
     {
-        public IDatabase Redis => throw new System.NotImplementedException();
+        private readonly ConnectionMultiplexer _redisConnection;
+
+        public BasketContext(ConnectionMultiplexer redisConnection)
+        {
+            _redisConnection = redisConnection;
+            Redis = _redisConnection.GetDatabase();
+        }
+
+        public IDatabase Redis { get; }
     }
 }

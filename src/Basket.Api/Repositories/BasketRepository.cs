@@ -1,24 +1,47 @@
-﻿using Basket.Api.Entities;
+﻿using Basket.Api.Data.Interfaces;
+using Basket.Api.Entities;
 using Basket.Api.Repositories.Interfaces;
+using Newtonsoft.Json;
 using System.Threading.Tasks;
 
 namespace Basket.Api.Repositories
 {
     public class BasketRepository : IBasketRepository
     {
-        public Task<BasketCart> DeleteBasket(string username)
+        private readonly IBasketContext _context;
+
+        public BasketRepository(IBasketContext context)
         {
-            throw new System.NotImplementedException();
+            _context = context;
         }
 
-        public Task<BasketCart> GetBasket(string userName)
+        public async Task<BasketCart> GetBasket(string userName)
         {
-            throw new System.NotImplementedException();
+            var basket = await _context.Redis.StringGetAsync(userName);
+
+            if (basket.IsNullOrEmpty)
+            {
+                return null;
+            }
+
+            return JsonConvert.DeserializeObject<BasketCart>(basket);
         }
 
-        public Task<BasketCart> UpdateBasket(BasketCart basket)
+        public async Task<BasketCart> UpdateBasket(BasketCart basket)
         {
-            throw new System.NotImplementedException();
+            var updated = await _context.Redis.StringSetAsync(basket.UserName, JsonConvert.SerializeObject(basket));
+
+            if (!updated)
+            {
+                return null;
+            }
+
+            return await GetBasket(basket.UserName);
+        }
+
+        public async Task<bool> DeleteBasket(string username)
+        {
+            return await _context.Redis.KeyDeleteAsync(username);
         }
     }
 }

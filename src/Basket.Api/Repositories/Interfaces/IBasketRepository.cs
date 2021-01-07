@@ -7,6 +7,6 @@ namespace Basket.Api.Repositories.Interfaces
     {
         public Task<BasketCart> GetBasket(string userName);
         public Task<BasketCart> UpdateBasket(BasketCart basket);
-        public Task<BasketCart> DeleteBasket(string username);
+        public Task<bool> DeleteBasket(string username);
     }
 }

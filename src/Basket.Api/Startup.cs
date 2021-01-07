@@ -1,5 +1,6 @@
 using Basket.Api.Data;
 using Basket.Api.Data.Interfaces;
+using Basket.Api.Repositories;
 using Basket.Api.Repositories.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -30,7 +31,7 @@ namespace Basket.Api
             });
 
             services.AddTransient<IBasketContext, BasketContext>();
-            services.AddTransient<IBasketRepository, IBasketRepository>();
+            services.AddTransient<IBasketRepository, BasketRepository>();
 
             services.AddSwaggerGen(c =>
             {

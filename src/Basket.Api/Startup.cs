@@ -1,8 +1,10 @@
+using AutoMapper;
 using Basket.Api.Data;
 using Basket.Api.Data.Interfaces;
 using Basket.Api.Repositories;
 using Basket.Api.Repositories.Interfaces;
 using EventBusRabbitMq;
+using EventBusRabbitMq.Producers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -34,6 +36,8 @@ namespace Basket.Api
 
             services.AddTransient<IBasketContext, BasketContext>();
             services.AddTransient<IBasketRepository, BasketRepository>();
+            services.AddAutoMapper(typeof(Startup));
+            services.AddSingleton<EventBusRabbitMqProducer>();
 
             services.AddSwaggerGen(c =>
             {
@@ -61,6 +65,7 @@ namespace Basket.Api
             });
 
             services.AddControllers();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -7,10 +7,10 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
 WORKDIR /src
-COPY ["src/Catalog/Catalog.Api/Catalog.Api.csproj", "src/Catalog/Catalog.Api/"]
-RUN dotnet restore "src/Catalog/Catalog.Api/Catalog.Api.csproj"
+COPY ["src/Catalog.Api/Catalog.Api.csproj", "src/Catalog.Api/"]
+RUN dotnet restore "src/Catalog.Api/Catalog.Api.csproj"
 COPY . .
-WORKDIR "/src/src/Catalog/Catalog.Api"
+WORKDIR "/src/src/Catalog.Api"
 RUN dotnet build "Catalog.Api.csproj" -c Release -o /app/build
 
 FROM build AS publish

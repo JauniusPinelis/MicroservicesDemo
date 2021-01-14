@@ -6,12 +6,14 @@ services:
     image: mongo
   basketdb:
     image: redis
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
 
   catalog.api:
     image: ${DOCKER_REGISTRY-}catalogapi
     build:
       context: .
-      dockerfile: src/Catalog/Catalog.Api/Dockerfile
+      dockerfile: src/Catalog.Api/Dockerfile
 
   basket.api:
     image: ${DOCKER_REGISTRY-}basketapi

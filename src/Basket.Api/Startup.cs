@@ -37,7 +37,6 @@ namespace Basket.Api
             services.AddTransient<IBasketContext, BasketContext>();
             services.AddTransient<IBasketRepository, BasketRepository>();
             services.AddAutoMapper(typeof(Startup));
-            services.AddSingleton<EventBusRabbitMqProducer>();
 
             services.AddSwaggerGen(c =>
             {
@@ -63,6 +62,8 @@ namespace Basket.Api
 
                 return new RabbitMqConnection(factory);
             });
+
+            services.AddSingleton<EventBusRabbitMqProducer>();
 
             services.AddControllers();
 

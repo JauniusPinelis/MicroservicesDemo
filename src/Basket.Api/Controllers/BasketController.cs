@@ -1,13 +1,13 @@
-﻿using AutoMapper;
+﻿using System;
+using System.Net;
+using System.Threading.Tasks;
+using AutoMapper;
 using Basket.Api.Entities;
 using Basket.Api.Repositories.Interfaces;
 using EventBusRabbitMq.Common;
 using EventBusRabbitMq.Events;
 using EventBusRabbitMq.Producers;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Net;
-using System.Threading.Tasks;
 
 namespace Basket.Api.Controllers
 {
@@ -30,6 +30,14 @@ namespace Basket.Api.Controllers
         [ProducesResponseType(typeof(BasketCart), (int)HttpStatusCode.OK)]
         public async Task<ActionResult<BasketCart>> GetBasket(string userName)
         {
+            var basketCartItem = new BasketCartItem();
+            var basketCartItem2 = new BasketCartItem();
+
+            if (basketCartItem == basketCartItem2)
+            {
+                return null;
+            }
+
             var basket = await _repository.GetBasket(userName);
             return Ok(basket ?? new BasketCart(userName));
         }

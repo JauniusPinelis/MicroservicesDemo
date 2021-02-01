@@ -1,4 +1,3 @@
-using System.Reflection;
 using AutoMapper;
 using EventBusRabbitMq;
 using MediatR;
@@ -9,6 +8,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using Ordering.Api.Extensions;
+using Ordering.Api.RabbitMq;
 using Ordering.Application.Handlers;
 using Ordering.Application.Mappings;
 using Ordering.Core.Repositories;
@@ -17,6 +18,7 @@ using Ordering.Infrastructure;
 using Ordering.Infrastructure.Repositories;
 using Ordering.Infrastructure.Repositories.Base;
 using RabbitMQ.Client;
+using System.Reflection;
 
 namespace Ordering.Api
 {
@@ -70,7 +72,7 @@ namespace Ordering.Api
                 return new RabbitMqConnection(factory);
             });
 
-            services.AddSingleton<EventRabbitMqConsumer>();
+            services.AddSingleton<EventBusRabbitMqConsumer>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -91,6 +93,8 @@ namespace Ordering.Api
             {
                 endpoints.MapControllers();
             });
+
+            app.UseRabbitListener();
 
             app.UseSwagger();
             app.UseSwaggerUI(c =>

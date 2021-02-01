@@ -29,5 +29,10 @@ namespace Basket.Api.Entities
                 return totalprice;
             }
         }
+
+        public override string ToString()
+        {
+            return "";
+        }
     }
 }

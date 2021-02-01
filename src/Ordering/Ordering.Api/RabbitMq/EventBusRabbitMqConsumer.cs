@@ -1,6 +1,4 @@
-﻿using System;
-using System.Text;
-using AutoMapper;
+﻿using AutoMapper;
 using EventBusRabbitMq;
 using EventBusRabbitMq.Common;
 using EventBusRabbitMq.Events;
@@ -8,10 +6,14 @@ using MediatR;
 using Newtonsoft.Json;
 using Ordering.Application.Commands;
 using Ordering.Core.Repositories;
+using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
+using System;
+using System.Text;
 
 namespace Ordering.Api.RabbitMq
 {
+    // This counsumer is for particular event
     public class EventBusRabbitMqConsumer
     {
         private readonly IRabbitMqConnection _connection;
@@ -47,7 +49,14 @@ namespace Ordering.Api.RabbitMq
                 var basketCheckoutEvent = JsonConvert.DeserializeObject<BacketCheckoutEvent>(message);
 
                 var command = _mapper.Map<CheckoutOrderCommand>(basketCheckoutEvent);
+
+                var result = await _mediator.Send(command);
             }
+        }
+
+        public void Disconnect()
+        {
+            _connection.Dispose();
         }
     }
 }

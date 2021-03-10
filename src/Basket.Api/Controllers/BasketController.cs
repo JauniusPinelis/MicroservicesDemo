@@ -1,13 +1,13 @@
-﻿using System;
-using System.Net;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using Basket.Api.Entities;
 using Basket.Api.Repositories.Interfaces;
 using EventBusRabbitMq.Common;
 using EventBusRabbitMq.Events;
 using EventBusRabbitMq.Producers;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Net;
+using System.Threading.Tasks;
 
 namespace Basket.Api.Controllers
 {
@@ -91,7 +91,7 @@ namespace Basket.Api.Controllers
             }
             catch (Exception)
             {
-
+                throw;
             }
 
             return Accepted();

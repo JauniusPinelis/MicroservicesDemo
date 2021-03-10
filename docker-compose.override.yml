@@ -15,6 +15,14 @@ services:
     ports:
         - "6379:6379"
 
+  orderdb:
+    container_name: orderdb
+    ports: 
+        - "1433:1433"
+    environment:
+        SA_PASSWORD: "Testing123."
+        ACCEPT_EULA: "Y"
+
   rabbitmq:
     container_name: rabbitmq
     restart: always
@@ -51,3 +59,14 @@ services:
         ports:
             - "8001:80"
 
+
+  ordering.api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+      - "ConnectionStrings:OrderConnection=Server=localhost;Database=OrderDb; User Id=sa;Password=Testing123."
+    ports:
+      - "80"
+      - "443"
+    volumes:
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro

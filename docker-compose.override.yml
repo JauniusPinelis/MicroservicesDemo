@@ -61,12 +61,17 @@ services:
 
 
   ordering.api:
+    container_name: orderingapi
+    restart: on-failure
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_URLS=https://+:443;http://+:80
-      - "ConnectionStrings:OrderConnection=Server=localhost;Database=OrderDb; User Id=sa;Password=Testing123."
+      - "ConnectionStrings:OrderConnection=Server=orderdb;Database=OrderDb; User Id=sa;Password=Testing123."
+      - "EventBus:HostName=rabbitmq"
     ports:
-      - "80"
-      - "443"
+      - "8002:80"
+    depends_on:
+        - orderdb
+        - rabbitmq
     volumes:
       - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro

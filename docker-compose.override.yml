@@ -65,7 +65,6 @@ services:
     restart: on-failure
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_URLS=https://+:443;http://+:80
       - "ConnectionStrings:OrderConnection=Server=orderdb;Database=OrderDb; User Id=sa;Password=Testing123."
       - "EventBus:HostName=rabbitmq"
     ports:
@@ -74,4 +73,5 @@ services:
         - orderdb
         - rabbitmq
     volumes:
-      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+        - ${HOME}/.microsoft/usersecrets/:/root/.microsoft/usersecrets
+        - ${HOME}/.aspnet/https:/root/.aspnet/https/

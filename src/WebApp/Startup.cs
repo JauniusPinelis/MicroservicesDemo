@@ -1,8 +1,6 @@
-using AspnetRunBasics.Data;
 using AspnetRunBasics.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -27,11 +25,8 @@ namespace AspnetRunBasics
             //services.AddDbContext<AspnetRunContext>(c =>
             //    c.UseInMemoryDatabase("AspnetRunConnection"));
 
-            // add database dependecy
-            services.AddDbContext<AspnetRunContext>(c =>
-                c.UseSqlServer(Configuration.GetConnectionString("AspnetRunConnection")));
 
-            #endregion            
+            #endregion
 
             #region project services
 

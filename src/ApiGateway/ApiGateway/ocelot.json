@@ -1,0 +1,65 @@
+{
+	"Reroutes": [
+		// Catalog Api
+		{
+			"DownStreamPathTemplate": "/api/v1/Catalog",
+			"DownStreamPathSceme": "https",
+			"DownStreamPathHostAndPorts": [
+				{
+					"Host": "catalogapi",
+					"Port": 80
+				}
+			],
+			"UpstreamPathTemplate": "/Catalog",
+			"UpstreamHttpMethod": [ "GET", "POST", "PUT" ]
+		},
+		{
+			"DownStreamPathTemplate": "/api/v1/Catalog/{id}",
+			"DownStreamPathSceme": "https",
+			"DownStreamPathHostAndPorts": [
+				{
+					"Host": "catalogapi",
+					"Port": 80
+				}
+			],
+			"UpstreamPathTemplate": "/Catalog/{id}",
+			"UpstreamHttpMethod": [ "GET", "DELETE" ]
+		},
+		{
+			"DownStreamPathTemplate": "/api/v1/GetproductByCategory",
+			"DownStreamPathSceme": "https",
+			"DownStreamPathHostAndPorts": [
+				{
+					"Host": "catalogapi",
+					"Port": 80
+				}
+			],
+			"UpstreamPathTemplate": "/Catalog/GetProductByCategory/{category}",
+			"UpstreamHttpMethod": [ "GET" ]
+		},
+		{
+			"DownStreamPathTemplate": "/api/v1/Basket",
+			"DownStreamPathSceme": "https",
+			"DownStreamPathHostAndPorts": [
+				{
+					"Host": "basketapi",
+					"Port": 80
+				}
+			],
+			"UpstreamPathTemplate": "/Catalog",
+			"UpstreamHttpMethod": [ "GET", "POST" ]
+		},
+		{
+			"DownStreamPathTemplate": "/api/v1/Basket/{id}",
+			"DownStreamPathSceme": "https",
+			"DownStreamPathHostAndPorts": [
+				{
+					"Host": "basketapi",
+					"Port": 80
+				}
+			],
+			"UpstreamPathTemplate": "/Catalog/{id}",
+			"UpstreamHttpMethod": [ "DELETE" ]
+		}
+	]
+}

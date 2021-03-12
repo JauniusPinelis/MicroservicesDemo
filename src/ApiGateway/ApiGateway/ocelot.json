@@ -46,7 +46,7 @@
 					"Port": 80
 				}
 			],
-			"UpstreamPathTemplate": "/Catalog",
+			"UpstreamPathTemplate": "/basket",
 			"UpstreamHttpMethod": [ "GET", "POST" ]
 		},
 		{
@@ -58,8 +58,33 @@
 					"Port": 80
 				}
 			],
-			"UpstreamPathTemplate": "/Catalog/{id}",
+			"UpstreamPathTemplate": "/Basket/{id}",
 			"UpstreamHttpMethod": [ "DELETE" ]
+		},
+		{
+			"DownStreamPathTemplate": "/api/v1/Basket/Checkout",
+			"DownStreamPathSceme": "https",
+			"DownStreamPathHostAndPorts": [
+				{
+					"Host": "basketapi",
+					"Port": 80
+				}
+			],
+			"UpstreamPathTemplate": "/api/v1/Basket/Checkout",
+			"UpstreamHttpMethod": [ "POST" ]
+		},
+		{
+			"DownStreamPathTemplate": "/api/v1/Order",
+			"DownStreamPathSceme": "https",
+			"DownStreamPathHostAndPorts": [
+				{
+					"Host": "basketapi",
+					"Port": 80
+				}
+			],
+			"UpstreamPathTemplate": "/Order",
+			"UpstreamHttpMethod": [ "GET" ]
 		}
+
 	]
 }

@@ -89,3 +89,18 @@ services:
     volumes:
         - ${HOME}/.microsoft/usersecrets/:/root/.microsoft/usersecrets
         - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+
+  webapp:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "ApiSettings:BaseAddress=apigateway"
+    depends_on:
+      - catalog.api
+      - basket.api
+      - ordering.api
+      - apigateway
+    ports:
+      - "8003:80"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro

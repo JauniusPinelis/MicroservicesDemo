@@ -37,3 +37,10 @@ services:
       context: .
       dockerfile: src/ApiGateway/ApiGateway/Dockerfile
 
+
+  webapp:
+    image: ${DOCKER_REGISTRY-}webapp
+    build:
+      context: .
+      dockerfile: src/WebApp/Dockerfile
+

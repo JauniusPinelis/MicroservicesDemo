@@ -29,7 +29,7 @@ namespace AspnetRunBasics
 
             services.AddTransient<ICatalogApi, CatalogApi>();
             services.AddTransient<IBasketApi, BasketApi>();
-            services.AddTransient<ICatalogApi, CatalogApi>();
+            services.AddTransient<IOrderApi, OrderApi>();
 
 
             services.AddRazorPages();

@@ -44,3 +44,10 @@ services:
       context: .
       dockerfile: src/WebApp/Dockerfile
 
+
+  discount.api:
+    image: ${DOCKER_REGISTRY-}discountapi
+    build:
+      context: .
+      dockerfile: src/Discount.Api/Dockerfile
+

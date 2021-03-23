@@ -32,8 +32,6 @@ services:
     restart: always
     ports:
         - "5432:5432"
-    volumes:
-      - postgres_data:/var/lib/postgresql/data/
 
   rabbitmq:
     container_name: rabbitmq
@@ -125,4 +123,4 @@ services:
     depends_on:
       - discountdb
     ports:
-      - "8002:80"
+      - "8004:80"
